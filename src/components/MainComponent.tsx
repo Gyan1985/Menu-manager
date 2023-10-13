@@ -1,4 +1,4 @@
-import { CircularProgress, Grid, Stack, Typography } from "@mui/material"
+import { Box, CircularProgress, Grid, Stack, Typography } from "@mui/material"
 import React, { useEffect, useRef, useState } from "react"
 import { getUrl } from "../services";
 import { Card } from "./Card"
@@ -74,7 +74,10 @@ export const MainComponent = () => {
           );
         }
       )}
-      {currentPage.current === totalPage && <h2 style={{ textAlign: "center" }}>No More Data</h2> 
+      {currentPage.current === totalPage ? <h2 style={{ textAlign: "center" }}>No More Data</h2> :
+        <Box sx={{ display: 'flex', justifyContent: "center" ,alignItems: "center",height: "100px"}}>
+          <CircularProgress color="inherit" />
+        </Box>
       } </>
   )
 }
