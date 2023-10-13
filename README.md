@@ -34,4 +34,8 @@
  * Bootstrap.
   
  * Custom infinite Scroll using DOM.
-# Menu-manager
+
+
+## Env Key for APi
+
+ * REACT_APP_API_URL
