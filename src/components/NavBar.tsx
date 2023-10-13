@@ -27,7 +27,7 @@ export const NavBar = ({ searchValue, setSearch, setCurrentPage, sortValue, setS
                                     setCurrentPage()
                                 }}
                                 className="form-control" aria-label="Search" >
-                                <option>Sort by price</option>
+                                <option>--Sort--</option>
                                 <option value={"desc"}>Price hign to low</option>
                                 <option value={"asc"}>Price low to high</option>
                             </select>

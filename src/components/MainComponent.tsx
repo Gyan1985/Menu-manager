@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material"
+import { CircularProgress, Grid, Stack, Typography } from "@mui/material"
 import React, { useEffect, useRef, useState } from "react"
 import { getUrl } from "../services";
 import { Card } from "./Card"
@@ -12,10 +12,9 @@ export const MainComponent = () => {
   const [totalPage, settotalPage] = useState(1);
   const [loading, setLoading] = useState(true)
   const [err, setErr] = useState("");
-  const [endMsg, setEndMsg] = useState("");
- 
+
   const currentPage = useRef(1)
- 
+
   useEffect(() => {
     if (currentPage.current === 1) {
       fetchData(1)
@@ -25,9 +24,9 @@ export const MainComponent = () => {
   }, [loading, searchValue, sortValue]);
 
 
-  const fetchData = async (page:number) => {
+  const fetchData = async (page: number) => {
     try {
-      if(page > totalPage){
+      if (page > totalPage) {
         return
       }
       currentPage.current = page;
@@ -42,12 +41,12 @@ export const MainComponent = () => {
         if (page === 1) {
           setMenu(menu_list)
         } else {
-          setMenu((prev:any)=> [...prev, ...menu_list])
+          setMenu((prev: any) => [...prev, ...menu_list])
         }
         settotalPage(total_pages);
         setLoading(false);
       }
-    } catch (error:any) {
+    } catch (error: any) {
       setErr(error)
       setLoading(false)
     }
@@ -58,29 +57,24 @@ export const MainComponent = () => {
     if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || loading) {
       return;
     }
-    fetchData(currentPage.current+1);
+    fetchData(currentPage.current + 1);
   }
 
-  if(loading) return <h2 style={{textAlign: "center"}}>Loading ..............</h2>
+  if (loading) return <h2 style={{ textAlign: "center" }}>Loading ..............</h2>
 
-  if(err) return <h2 style={{textAlign: "center"}}>Error Occoured</h2>
+  if (err) return <h2 style={{ textAlign: "center" }}>Error Occoured</h2>
 
   return (
     <>
-      <NavBar searchValue={searchValue} sortValue={sortValue} setSortValue={setSortValue} setSearch={setSearchValue} setCurrentPage={()=> currentPage.current = 1} />
-      <Grid container spacing={2}>
-        {menu.map(
-          ({ price, name }: {price : number,name: string}, index: number) => {
-            return (
-              <Grid style={{ width: "100%" }} key={index} item md={3} sm={4} xs={6}>
-                <Card name={name} price={price} />
-              </Grid>
-            );
-          }
-        )}
-      </Grid>
-      <Typography>{endMsg}</Typography>
-      {currentPage.current === totalPage ? <h2 style={{textAlign: "center"}}>No More Data</h2> : <h2 style={{textAlign: "center"}}>Loading..........</h2>}
-    </>
+      <NavBar searchValue={searchValue} sortValue={sortValue} setSortValue={setSortValue} setSearch={setSearchValue} setCurrentPage={() => currentPage.current = 1} />
+      {menu.map(
+        ({ price, name }: { price: number, name: string }, index: number) => {
+          return (
+            <Card name={name} price={price} key={index} />
+          );
+        }
+      )}
+      {currentPage.current === totalPage && <h2 style={{ textAlign: "center" }}>No More Data</h2> 
+      } </>
   )
 }
