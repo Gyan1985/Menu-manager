@@ -60,8 +60,6 @@ export const MainComponent = () => {
     fetchData(currentPage.current + 1);
   }
 
-  if (loading) return <h2 style={{ textAlign: "center" }}>Loading ..............</h2>
-
   if (err) return <h2 style={{ textAlign: "center" }}>Error Occoured</h2>
 
   return (
@@ -74,7 +72,7 @@ export const MainComponent = () => {
           );
         }
       )}
-      {currentPage.current === totalPage ? <h2 style={{ textAlign: "center" }}>No More Data</h2> :
+      {currentPage.current === totalPage || loading ? <h2 style={{ textAlign: "center" }}>No More Data</h2> :
         <Box sx={{ display: 'flex', justifyContent: "center" ,alignItems: "center",height: "100px"}}>
           <CircularProgress color="inherit" />
         </Box>
