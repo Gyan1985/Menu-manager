@@ -32,7 +32,7 @@ export const MainComponent = () => {
       currentPage.current = page;
       const data = await fetch(getUrl(searchValue, sortValue, order, page), {
         headers: {
-          ['ngrok-skip-browser-warning']: 'true'
+          // ['ngrok-skip-browser-warning']: 'true'
         }
       });
       const response = await data.json();
